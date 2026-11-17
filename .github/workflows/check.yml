@@ -1,0 +1,25 @@
+# Checks every push and pull request: the checker's own tests, then every translation file against the format, the
+# editorial rules and today's JMdict
+name: Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test the checker
+        run: python -m unittest discover -s tests
+      - name: Download JMdict
+        run: python tools/fetch_jmdict.py jmdict-eng.json.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check the translations
+        run: python tools/check.py --jmdict jmdict-eng.json.zip

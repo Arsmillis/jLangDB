@@ -1,3 +1,111 @@
 # jLangDB
 
-Translations of JMdict's Japanese definitions into other languages. Licence: CC BY-SA 4.0 (see LICENSE).
+Translations of [JMdict](https://www.edrdg.org/jmdict/j_jmdict.html)'s Japanese definitions into other languages,
+starting with Spanish: for the words JMdict has no translation for yet, or a fuller one. They are written and reviewed
+by [JMdict's editorial policy](https://www.edrdg.org/wiki/Editorial_policy.html), so that they can be offered to the
+EDRDG, which maintains JMdict.
+
+**JMdict comes first.** A translation added to JMdict reaches every app that uses it and is kept up to date with its
+entry by JMdict's editors. jLangDB is a staging area: translations are collected and reviewed here, used now by
+[Kanji Lens](https://github.com/Arsmillis/KanjiLens), offered upstream in batches, and dropped from here once JMdict has
+them.
+
+## What's here
+
+| Path | What it is |
+|---|---|
+| `data/spa.json` | Spanish translations (one file per language, named by JMdict's language code, ISO 639-2) |
+| `tools/check.py` | Checks every file against the format and the rules below, and against today's JMdict |
+| `tools/format.py` | Rewrites the files in the standard layout (run it after editing one by hand) |
+| `tools/fetch_jmdict.py` | Downloads the current English JMdict ([jmdict-simplified](https://github.com/scriptin/jmdict-simplified)), for the check |
+
+Releases (`jlangdb-v<N>.zip`: the files and the licence) are what apps download, at a pinned version. The maintainer
+publishes them with `tools/release.sh` (see CHANGELOG.md for what each one changed).
+
+## The format
+
+A file translates JMdict's **senses** (meanings), keyed by JMdict entry id (`ent_seq`, which stays the same across
+dictionary updates): one translated sense per JMdict sense, in the same order, each beside the English it was
+translated from. お天気 (entry 1002470), whose senses are "weather" and "mood; temper":
+
+```json
+{
+  "format": 1,
+  "entries": {
+    "1002470": {
+      "senses": [
+        {"eng": ["weather"], "spa": ["tiempo (atmosférico)"]},
+        {"eng": ["mood", "temper"], "spa": ["humor", "estado de ánimo"]}
+      ],
+      "status": "approved",
+      "source": "player",
+      "refs": [],
+      "comment": ""
+    }
+  }
+}
+```
+
+- **`senses`**: every sense of the entry, in JMdict's order. `eng` is JMdict's English for that sense, exactly; the
+  other key (the file's language) is a list of glosses. A gloss is a string, or a typed one,
+  `{"type": "lit", "text": "…"}`, with JMdict's gloss types: `lit` (literal, last in its sense), `fig` (figurative),
+  `expl` (explanatory) and `tm` (trademark).
+- **`status`**: `pending` (submitted, not reviewed yet), `approved`, or `rejected` (the reason in `comment`). Only
+  approved translations are used.
+- **`source`**: `player` (sent by someone using an app), `machine` (machine-translated, only ever used once a person
+  approves it) or `maintainer`.
+- **`refs`**: references (a dictionary, a corpus, a link) where the meaning isn't simply a translation of the English.
+  Required for anything substantial.
+- **`comment`**: notes for the reviewer about this entry, and a rejection's reason.
+- **`submitter`** (optional): a name or pen-name to credit.
+
+If JMdict later rewords a sense, `eng` no longer matches it: the check flags the entry for review, and apps skip it
+until it's updated.
+
+## How a translation is written
+
+From the EDRDG's [Editorial policy](https://www.edrdg.org/wiki/Editorial_policy.html) (and Jim Breen's
+[updated copy](https://www.edrdg.org/~jwb/Updated_editorial_policy.html)), applied to Spanish:
+
+- **One gloss per meaning**, as separate items (no semicolons inside a gloss).
+- **Your own words**, never copied from another dictionary. Translating JMdict's English is fine (it's CC BY-SA);
+  taking from a commercial dictionary isn't.
+- **The gloss matches the sense's part of speech:** verbs in the infinitive (comer for "to eat"), adjectives as plain
+  adjectives (not "es…"), nouns as nouns.
+- **Lowercase**, except proper nouns. **No leading article** (el, la, un, una) unless it's needed or part of a name
+  (La Haya). No full stop at the end.
+- **Parentheses for brief context:** "consultar (al oráculo)". Useful explanations, not vague ones; no explanation of
+  words any reader knows.
+- **Never build a meaning from the kanji's own meanings.**
+- **Regional variants** where they differ: ordenador; computadora. Numbers and units as JMdict writes them ("100 km",
+  "15°C").
+- **Keep the register** the entry's tags give (honorific, humble, slang, vulgar, archaic…): a vulgar word gets a
+  vulgar translation.
+- **No notes of your own** in the glosses: what a reviewer should know goes in `comment`.
+
+`tools/check.py` enforces the format and warns about the style rules that have exceptions (articles, capitals, full
+stops). New entries, readings or parts of speech belong in JMdict itself (proposed through
+[JMdictDB](https://www.edrdg.org/jmdictdb/index.html), with references), and kanji meanings in
+[KANJIDIC](https://www.edrdg.org/wiki/KANJIDIC_Project.html), not here.
+
+## Contributing
+
+Send translations as a pull request changing a file in `data/`, every entry `pending`, or as an issue with the same
+change attached. By sending a translation you agree to share it under CC BY-SA 4.0 (below). Before sending:
+
+```
+python tools/fetch_jmdict.py
+python tools/format.py
+python tools/check.py --jmdict jmdict-eng.json.zip
+```
+
+The maintainer reviews each batch entry by entry, as the EDRDG's editors do: each is approved (possibly with small
+edits) or rejected with its reason. The record stays in the repository's history.
+
+## Licence
+
+The translations are adaptations of JMdict, the property of the
+[Electronic Dictionary Research and Development Group](https://www.edrdg.org/) (EDRDG), and are shared under the same
+licence, [Creative Commons Attribution-ShareAlike 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (see
+`LICENSE`): use them for anything, credit the EDRDG and jLangDB's contributors, and share what you make from them
+under the same terms. The tools in `tools/` are under the same licence.

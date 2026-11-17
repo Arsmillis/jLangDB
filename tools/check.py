@@ -1,0 +1,192 @@
+"""Check jLangDB's translation files against the format and the editorial rules (see README.md).
+
+    python tools/check.py                         the format and style of every file in data/
+    python tools/check.py --jmdict jmdict-eng.json.zip
+                                                  also against JMdict: every entry and sense exists, and the English
+                                                  each translation was made from is still JMdict's
+
+The JMdict file is jmdict-simplified's English edition (jmdict-eng-*.json.zip, or its .json). Errors make the check
+fail; warnings are for the reviewer (a style rule with exceptions, or an approved translation whose English has
+changed since). Uses only Python's standard library.
+"""
+import json
+import re
+import sys
+import zipfile
+from pathlib import Path
+
+DATA = Path(__file__).resolve().parents[1] / "data"
+FORMAT = 1
+STATUSES = ("pending", "approved", "rejected")
+SOURCES = ("player", "machine", "maintainer")
+GLOSS_TYPES = ("lit", "fig", "expl", "tm")
+ENTRY_KEYS = {"senses", "status", "source", "refs", "comment", "submitter"}
+# Leading articles, which a gloss leaves out unless it needs one (Spanish; a file for another language would add its
+# own)
+ARTICLES = {"spa": ("el", "la", "los", "las", "un", "una", "unos", "unas")}
+
+
+class Report:
+    def __init__(self):
+        self.errors, self.warnings = [], []
+
+    def error(self, where, text):
+        self.errors.append(f"{where}: {text}")
+
+    def warn(self, where, text):
+        self.warnings.append(f"{where}: {text}")
+
+
+# The text of a gloss: a plain string, or {"type": ..., "text": ...} for a typed one
+def gloss_text(gloss):
+    return gloss["text"] if isinstance(gloss, dict) else gloss
+
+
+# Check one gloss of language `lang`; where: "spa.json 1002470 sense 1"
+def check_gloss(report, where, lang, gloss, last):
+    if isinstance(gloss, dict):
+        if set(gloss) != {"type", "text"} or gloss["type"] not in GLOSS_TYPES:
+            report.error(where, f"a typed gloss is {{\"type\": one of {', '.join(GLOSS_TYPES)}, \"text\": ...}}")
+            return
+        if gloss["type"] == "lit" and not last:
+            report.error(where, "a literal (lit) gloss comes last in its sense")
+    text = gloss_text(gloss)
+    if not isinstance(text, str) or not text.strip():
+        report.error(where, "a gloss is a non-empty string")
+        return
+    if text != text.strip() or "  " in text:
+        report.error(where, f"extra spaces in {text!r}")
+    if ";" in text:
+        report.error(where, f"{text!r}: one meaning per gloss (a semicolon separates glosses, so list them instead)")
+    first = text.split()[0].casefold()
+    if first in ARTICLES.get(lang, ()):
+        report.warn(where, f"{text!r} starts with an article: leave it out unless it's needed")
+    if text[0].isupper():
+        report.warn(where, f"{text!r} starts with a capital: lowercase unless it's a proper noun")
+    if text.endswith("."):
+        report.warn(where, f"{text!r} ends with a full stop")
+
+
+# Check one entry of a file in language `lang`
+def check_entry(report, name, lang, eid, entry):
+    where = f"{name} {eid}"
+    if not re.fullmatch(r"[1-9][0-9]*", eid):
+        report.error(where, "an entry's key is its JMdict entry id (ent_seq)")
+    if not isinstance(entry, dict):
+        report.error(where, "an entry is an object")
+        return
+    for key in set(entry) - ENTRY_KEYS:
+        report.error(where, f"unknown field {key!r}")
+    for key in ("senses", "status", "source"):
+        if key not in entry:
+            report.error(where, f"missing {key!r}")
+    if entry.get("status") not in STATUSES:
+        report.error(where, f"status is one of {', '.join(STATUSES)}")
+    if entry.get("source") not in SOURCES:
+        report.error(where, f"source is one of {', '.join(SOURCES)}")
+    refs = entry.get("refs", [])
+    if not isinstance(refs, list) or not all(isinstance(r, str) and r.strip() for r in refs):
+        report.error(where, "refs is a list of references (strings)")
+    for key in ("comment", "submitter"):
+        if not isinstance(entry.get(key, ""), str):
+            report.error(where, f"{key} is a string")
+    if entry.get("status") == "rejected" and not entry.get("comment", "").strip():
+        report.error(where, "a rejected entry gives the reason in its comment")
+    senses = entry.get("senses")
+    if not isinstance(senses, list) or not senses:
+        report.error(where, "senses is a list with one item per JMdict sense, in order")
+        return
+    for n, sense in enumerate(senses, start=1):
+        at = f"{where} sense {n}"
+        if not isinstance(sense, dict) or set(sense) != {"eng", lang}:
+            report.error(at, f"a sense has \"eng\" (the English translated) and {lang!r} (the translation)")
+            continue
+        eng = sense["eng"]
+        if not isinstance(eng, list) or not eng or not all(isinstance(g, str) and g for g in eng):
+            report.error(at, "eng is the sense's English glosses, as JMdict has them")
+        glosses = sense[lang]
+        if not isinstance(glosses, list) or not glosses:
+            report.error(at, f"{lang} is a list of glosses")
+            continue
+        for i, gloss in enumerate(glosses):
+            check_gloss(report, at, lang, gloss, i == len(glosses) - 1)
+
+
+# JMdict's English, by entry id: [[glosses of sense 1], [sense 2]...], from jmdict-simplified's English edition
+def load_jmdict(path):
+    path = Path(path)
+    if path.suffix == ".zip":
+        with zipfile.ZipFile(path) as z:
+            data = json.loads(z.read(z.namelist()[0]))
+    else:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    return {w["id"]: [[g["text"] for g in s["gloss"] if g["lang"] == "eng"] for s in w["sense"]]
+            for w in data["words"]}
+
+
+# Compare a file's entries with JMdict. A pending entry (a submission) must match today's JMdict; an approved one whose
+# English has changed since is flagged for review (the app skips it until it is updated)
+def check_against_jmdict(report, name, entries, jmdict):
+    for eid, entry in entries.items():
+        if not isinstance(entry, dict) or not isinstance(entry.get("senses"), list):
+            continue
+        flag = report.error if entry.get("status") == "pending" else report.warn
+        where = f"{name} {eid}"
+        english = jmdict.get(eid)
+        if english is None:
+            flag(where, "not in JMdict (removed or merged?)")
+        elif len(entry["senses"]) != len(english):
+            flag(where, f"{len(entry['senses'])} senses, JMdict has {len(english)}")
+        else:
+            for n, (sense, eng) in enumerate(zip(entry["senses"], english), start=1):
+                if isinstance(sense, dict) and sense.get("eng") != eng:
+                    flag(f"{where} sense {n}", f"JMdict's English is now {eng}, not {sense.get('eng')}")
+
+
+# Check one translation file (data/<language>.json); returns its entries
+def check_file(report, path):
+    name, lang = path.name, path.stem
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as e:
+        report.error(name, f"not valid UTF-8 JSON: {e}")
+        return {}
+    if not isinstance(data, dict) or data.get("format") != FORMAT or not isinstance(data.get("entries"), dict):
+        report.error(name, f"a file is {{\"format\": {FORMAT}, \"entries\": {{...}}}}")
+        return {}
+    for key in set(data) - {"format", "entries"}:
+        report.error(name, f"unknown field {key!r}")
+    # Written as the tools write it, so a change shows as a small diff: sorted ids, two-space indent, real characters
+    if path.read_text(encoding="utf-8") != dump(data):
+        report.error(name, "not in the standard layout: run python tools/format.py")
+    for eid, entry in data["entries"].items():
+        check_entry(report, name, lang, eid, entry)
+    return data["entries"]
+
+
+# A file's text in the standard layout
+def dump(data):
+    entries = dict(sorted(data["entries"].items(), key=lambda item: int(item[0]) if item[0].isdigit() else -1))
+    return json.dumps({"format": data["format"], "entries": entries}, ensure_ascii=False, indent=2) + "\n"
+
+
+def main(argv):
+    jmdict = None
+    if "--jmdict" in argv:
+        jmdict = load_jmdict(argv[argv.index("--jmdict") + 1])
+    report = Report()
+    files = sorted(DATA.glob("*.json"))
+    for path in files:
+        entries = check_file(report, path)
+        if jmdict is not None:
+            check_against_jmdict(report, path.name, entries, jmdict)
+    for line in report.warnings:
+        print("warning:", line)
+    for line in report.errors:
+        print("error:", line)
+    print(f"{len(files)} files: {len(report.errors)} errors, {len(report.warnings)} warnings")
+    return 1 if report.errors else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))
