@@ -1,0 +1,4 @@
+jmdict-eng.json.zip
+jmdict-eng*.json
+__pycache__/
+*.pyc
