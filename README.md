@@ -90,8 +90,9 @@ stops). New entries, readings or parts of speech belong in JMdict itself (propos
 
 ## Contributing
 
-Send translations as a pull request changing a file in `data/`, every entry `pending`, or as an issue with the same
-change attached. By sending a translation you agree to share it under CC BY-SA 4.0 (below). Before sending:
+Send translations as a pull request changing a file in `data/`, every entry `pending`, or with the **Send
+translations** issue form, attaching or pasting the same entries. By sending a translation you agree to share it under
+CC BY-SA 4.0 (below). Before sending a pull request:
 
 ```
 python tools/fetch_jmdict.py
@@ -100,7 +101,8 @@ python tools/check.py --jmdict jmdict-eng.json.zip
 ```
 
 The maintainer reviews each batch entry by entry, as the EDRDG's editors do: each is approved (possibly with small
-edits) or rejected with its reason. The record stays in the repository's history.
+edits) or rejected with its reason. The record stays in the repository's history. [REVIEWING.md](REVIEWING.md) has
+the details.
 
 ## Licence
 

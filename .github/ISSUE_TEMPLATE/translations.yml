@@ -1,0 +1,57 @@
+name: Send translations
+description: Send translations of JMdict entries for review (from Kanji Lens, or edited by hand).
+title: "Translations: "
+labels: ["translations"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you! Each entry is reviewed as JMdict's editors would: approved (possibly with small edits) or rejected
+        with the reason. README.md has the format and how a translation is written. A pull request works too.
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      options:
+        - Spanish (spa)
+    validations:
+      required: true
+  - type: textarea
+    id: translations
+    attributes:
+      label: Translations
+      description: >-
+        Attach the file with your translations (from an app such as Kanji Lens, or a changed data/spa.json; zipped
+        if GitHub won't take it), or paste the entries you translated as JSON. Every entry is "pending".
+      placeholder: |
+        "1002470": {
+          "senses": [
+            {"eng": ["weather"], "spa": ["tiempo (atmosférico)"]},
+            {"eng": ["mood", "temper"], "spa": ["humor", "estado de ánimo"]}
+          ],
+          "status": "pending", "source": "player", "refs": [], "comment": ""
+        }
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: References and notes
+      description: >-
+        Where a meaning isn't simply a translation of the English: what supports it (a dictionary, a corpus, a link),
+        and anything the reviewer should know. Limited to the entries sent.
+  - type: input
+    id: credit
+    attributes:
+      label: Name or pen-name to credit (optional)
+      description: Shown in the entries' submitter field. Leave it empty to stay anonymous.
+  - type: checkboxes
+    id: licence
+    attributes:
+      label: Licence
+      options:
+        - label: >-
+            I agree to share these translations under CC BY-SA 4.0, like JMdict, which they are adapted from. They
+            are my own words, not copied from another dictionary.
+          required: true

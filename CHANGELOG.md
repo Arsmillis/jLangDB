@@ -6,3 +6,5 @@ file format has its own version (`"format"` in each file), which changes only wh
 ## [Unreleased]
 
 - The format (version 1), its checks and the Spanish file, still empty: `data/spa.json`.
+- How to send translations (a **Send translations** issue form and a pull request template, both with the licence
+  agreement) and how they are reviewed (REVIEWING.md).

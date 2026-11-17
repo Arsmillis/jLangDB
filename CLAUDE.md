@@ -12,6 +12,9 @@ full plan and the reasoning behind it.
 - `tools/check.py` (the format and editorial rules; `--jmdict` adds the comparison with today's JMdict),
   `tools/format.py` (the standard layout), `tools/fetch_jmdict.py`. Standard library only: no dependencies.
 - `tests/`: `python -m unittest discover -s tests`.
+- Contributions: `.github/ISSUE_TEMPLATE/translations.yml` (the Send translations form) and
+  `.github/pull_request_template.md` both carry the CC BY-SA 4.0 agreement; keep their wording in step with
+  README.md's. REVIEWING.md is the maintainer's review process.
 
 ```
 python tools/fetch_jmdict.py && python tools/format.py && python tools/check.py --jmdict jmdict-eng.json.zip
