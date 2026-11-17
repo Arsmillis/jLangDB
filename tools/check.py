@@ -8,6 +8,9 @@
 The JMdict file is jmdict-simplified's English edition (jmdict-eng-*.json.zip, or its .json). Errors make the check
 fail; warnings are for the reviewer (a style rule with exceptions, or an approved translation whose English has
 changed since). Uses only Python's standard library.
+
+data/<code>.json holds the translations people wrote or approved; data/<code>_machine.json the machine translations,
+all pending until one is moved into <code>.json for review (tools/promote.py).
 """
 import json
 import re
@@ -63,12 +66,12 @@ def check_gloss(report, where, lang, gloss, last):
         report.warn(where, f"{text!r} starts with an article: leave it out unless it's needed")
     if text[0].isupper():
         report.warn(where, f"{text!r} starts with a capital: lowercase unless it's a proper noun")
-    if text.endswith("."):
+    if text.endswith(".") and not text.endswith("..."):    # "..." stands for a missing word, as in JMdict
         report.warn(where, f"{text!r} ends with a full stop")
 
 
-# Check one entry of a file in language `lang`
-def check_entry(report, name, lang, eid, entry):
+# Check one entry of a file in language `lang`; machine: the file is <code>_machine.json
+def check_entry(report, name, lang, eid, entry, machine=False):
     where = f"{name} {eid}"
     if not re.fullmatch(r"[1-9][0-9]*", eid):
         report.error(where, "an entry's key is its JMdict entry id (ent_seq)")
@@ -90,6 +93,9 @@ def check_entry(report, name, lang, eid, entry):
     for key in ("comment", "submitter"):
         if not isinstance(entry.get(key, ""), str):
             report.error(where, f"{key} is a string")
+    if machine and (entry.get("source"), entry.get("status")) != ("machine", "pending"):
+        report.error(where, "a machine translation is \"source\": \"machine\", \"status\": \"pending\" (approve it by"
+                            " moving it into the main file: tools/promote.py)")
     if entry.get("status") == "rejected" and not entry.get("comment", "").strip():
         report.error(where, "a rejected entry gives the reason in its comment")
     senses = entry.get("senses")
@@ -125,12 +131,13 @@ def load_jmdict(path):
 
 
 # Compare a file's entries with JMdict. A pending entry (a submission) must match today's JMdict; an approved one whose
-# English has changed since is flagged for review (the app skips it until it is updated)
-def check_against_jmdict(report, name, entries, jmdict):
+# English has changed since is flagged for review, and so is a machine translation (to translate again): apps skip
+# them until they are updated
+def check_against_jmdict(report, name, entries, jmdict, machine=False):
     for eid, entry in entries.items():
         if not isinstance(entry, dict) or not isinstance(entry.get("senses"), list):
             continue
-        flag = report.error if entry.get("status") == "pending" else report.warn
+        flag = report.error if entry.get("status") == "pending" and not machine else report.warn
         where = f"{name} {eid}"
         english = jmdict.get(eid)
         if english is None:
@@ -143,9 +150,12 @@ def check_against_jmdict(report, name, entries, jmdict):
                     flag(f"{where} sense {n}", f"JMdict's English is now {eng}, not {sense.get('eng')}")
 
 
-# Check one translation file (data/<language>.json); returns its entries
+# Check one translation file (data/<code>.json or data/<code>_machine.json); returns its entries
 def check_file(report, path):
-    name, lang = path.name, path.stem
+    name, lang, machine = path.name, path.stem.split("_")[0], path.stem.endswith("_machine")
+    if not re.fullmatch(r"[a-z]{3}(_machine)?", path.stem):
+        report.error(name, "a file is named by JMdict's language code: <code>.json, or <code>_machine.json")
+        return {}
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
     except (UnicodeDecodeError, json.JSONDecodeError) as e:
@@ -160,8 +170,19 @@ def check_file(report, path):
     if path.read_text(encoding="utf-8") != dump(data):
         report.error(name, "not in the standard layout: run python tools/format.py")
     for eid, entry in data["entries"].items():
-        check_entry(report, name, lang, eid, entry)
+        check_entry(report, name, lang, eid, entry, machine)
     return data["entries"]
+
+
+# A machine translation whose entry <code>.json has approved since is left over: flag it, to remove
+def check_leftovers(report, files):
+    for name, entries in files.items():
+        if name.endswith("_machine.json"):
+            main = files.get(name.replace("_machine", ""), {})
+            for eid in entries:
+                if isinstance(main.get(eid), dict) and main[eid].get("status") == "approved":
+                    report.warn(f"{name} {eid}", "approved in the main file: remove it here"
+                                                 " (python tools/promote.py --approved)")
 
 
 # A file's text in the standard layout
@@ -176,10 +197,12 @@ def main(argv):
         jmdict = load_jmdict(argv[argv.index("--jmdict") + 1])
     report = Report()
     files = sorted(DATA.glob("*.json"))
+    found = {}
     for path in files:
-        entries = check_file(report, path)
+        found[path.name] = entries = check_file(report, path)
         if jmdict is not None:
-            check_against_jmdict(report, path.name, entries, jmdict)
+            check_against_jmdict(report, path.name, entries, jmdict, path.stem.endswith("_machine"))
+    check_leftovers(report, found)
     for line in report.warnings:
         print("warning:", line)
     for line in report.errors:

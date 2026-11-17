@@ -34,8 +34,12 @@ explanation) needs a reference in `refs`; without one, ask for it or reject it.
 
 ## Machine translations
 
-Entries with `"source": "machine"` are reviewed the same way, one by one. Approving one means a person checked it;
-until then it stays pending.
+Machine translations live in `data/<code>_machine.json`, all pending. To review some, move them into the main file
+on a branch, `python tools/promote.py spa 1002470 ...`, and review them there one by one like any submission: approving
+one means a person checked it (it keeps `"source": "machine"`, so its origin stays on record). A player's translation
+of a word that also has a machine one is reviewed as usual; once it's approved, `python tools/promote.py spa
+--approved` removes the machine copy (the check warns about any left over). The machine file itself is regenerated,
+not edited by hand.
 
 ## When JMdict changes
 

@@ -20,15 +20,15 @@ def entry(**changes):
     return e
 
 
-def run(entries, jmdict=None, layout=True):
+def run(entries, jmdict=None, layout=True, name="spa.json"):
     with tempfile.TemporaryDirectory() as tmp:
-        path = Path(tmp) / "spa.json"
+        path = Path(tmp) / name
         data = {"format": 1, "entries": entries}
         path.write_text(check.dump(data) if layout else json.dumps(data), encoding="utf-8")
         report = check.Report()
         found = check.check_file(report, path)
         if jmdict is not None:
-            check.check_against_jmdict(report, path.name, found, jmdict)
+            check.check_against_jmdict(report, path.name, found, jmdict, path.stem.endswith("_machine"))
         return report
 
 
@@ -60,9 +60,9 @@ class CheckTest(unittest.TestCase):
 
     def test_style_rules_only_warn(self):
         report = run({"1002470": entry(senses=[{"eng": ["weather"], "spa": ["El tiempo."]},
-                                               {"eng": ["mood", "temper"], "spa": ["humor"]}])})
+                                               {"eng": ["mood", "temper"], "spa": ["humor", "hablando de ..."]}])})
         self.assertEqual(report.errors, [])
-        self.assertEqual(len(report.warnings), 3)        # an article, a capital, a full stop
+        self.assertEqual(len(report.warnings), 3)        # an article, a capital, a full stop (not "...")
 
     def test_a_submission_must_match_todays_jmdict(self):
         stale = entry(senses=[{"eng": ["weather", "climate"], "spa": ["tiempo"]},
@@ -79,6 +79,45 @@ class CheckTest(unittest.TestCase):
 
     def test_layout(self):
         self.assertNotEqual(run({"1002470": entry()}, layout=False).errors, [])
+
+    def test_file_names(self):
+        self.assertEqual(run({}, name="spa_machine.json").errors, [])
+        self.assertNotEqual(run({}, name="spanish.json").errors, [])
+
+    def test_machine_translations_are_pending_and_marked(self):
+        machine = entry(source="machine")
+        self.assertEqual(run({"1002470": machine}, JMDICT, name="spa_machine.json").errors, [])
+        for wrong in (entry(), entry(source="machine", status="approved")):
+            self.assertNotEqual(run({"1002470": wrong}, name="spa_machine.json").errors, [])
+        # A machine translation from before JMdict changed: to translate again, not a failure
+        stale = entry(source="machine", senses=[{"eng": ["weather", "climate"], "spa": ["tiempo"]},
+                                                {"eng": ["mood", "temper"], "spa": ["humor"]}])
+        report = run({"1002470": stale}, JMDICT, name="spa_machine.json")
+        self.assertEqual((report.errors, len(report.warnings)), ([], 1))
+
+    def test_leftover_machine_translations_are_flagged(self):
+        report = check.Report()
+        check.check_leftovers(report, {"spa.json": {"1002470": entry(status="approved")},
+                                       "spa_machine.json": {"1002470": entry(source="machine")}})
+        self.assertEqual(len(report.warnings), 1)
+
+
+class PromoteTest(unittest.TestCase):
+    def test_promote_and_clear(self):
+        import promote
+        with tempfile.TemporaryDirectory() as tmp:
+            data = Path(tmp)
+            (data / "spa.json").write_text(check.dump({"format": 1, "entries": {
+                "1": entry(status="approved")}}), encoding="utf-8")
+            (data / "spa_machine.json").write_text(check.dump({"format": 1, "entries": {
+                "1": entry(source="machine"), "2": entry(source="machine"), "3": entry(source="machine")}}),
+                encoding="utf-8")
+            promote.DATA = data
+            promote.main(["spa", "2"])
+            promote.main(["spa", "--approved"])
+            main = json.loads((data / "spa.json").read_text(encoding="utf-8"))["entries"]
+            machine = json.loads((data / "spa_machine.json").read_text(encoding="utf-8"))["entries"]
+            self.assertEqual((sorted(main), main["2"]["status"], sorted(machine)), (["1", "2"], "pending", ["3"]))
 
 
 if __name__ == "__main__":

@@ -7,6 +7,8 @@ full plan and the reasoning behind it.
 
 ## Layout and commands
 
+- `data/<code>_machine.json`: machine translations, all `source: machine`, `status: pending`; approval is moving one
+  into `<code>.json` (`tools/promote.py`). Apps prefer: approved in `<code>.json` > JMdict's own > machine > English.
 - `data/<code>.json`: one file per language (JMdict's ISO 639-2 code: `spa`). Format version in `"format"`; a format
   change needs a new version, a matching change in Kanji Lens's `build_dict.py`, and a note in README.md.
 - `tools/check.py` (the format and editorial rules; `--jmdict` adds the comparison with today's JMdict),

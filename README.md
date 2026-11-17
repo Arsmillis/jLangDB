@@ -14,9 +14,11 @@ them.
 
 | Path | What it is |
 |---|---|
-| `data/spa.json` | Spanish translations (one file per language, named by JMdict's language code, ISO 639-2) |
+| `data/spa.json` | Spanish translations written or approved by people (one file per language, named by JMdict's language code, ISO 639-2) |
+| `data/spa_machine.json` | Spanish machine translations, for the words that have no Spanish yet; all unreviewed |
 | `tools/check.py` | Checks every file against the format and the rules below, and against today's JMdict |
 | `tools/format.py` | Rewrites the files in the standard layout (run it after editing one by hand) |
+| `tools/promote.py` | Moves machine translations into the main file for review, and clears the ones approved there |
 | `tools/fetch_jmdict.py` | Downloads the current English JMdict ([jmdict-simplified](https://github.com/scriptin/jmdict-simplified)), for the check |
 
 Releases (`jlangdb-v<N>.zip`: the files and the licence) are what apps download, at a pinned version. The maintainer
@@ -52,8 +54,7 @@ translated from. お天気 (entry 1002470), whose senses are "weather" and "mood
   `expl` (explanatory) and `tm` (trademark).
 - **`status`**: `pending` (submitted, not reviewed yet), `approved`, or `rejected` (the reason in `comment`). Only
   approved translations are used.
-- **`source`**: `player` (sent by someone using an app), `machine` (machine-translated, only ever used once a person
-  approves it) or `maintainer`.
+- **`source`**: `player` (sent by someone using an app), `machine` (machine-translated) or `maintainer`.
 - **`refs`**: references (a dictionary, a corpus, a link) where the meaning isn't simply a translation of the English.
   Required for anything substantial.
 - **`comment`**: notes for the reviewer about this entry, and a rejection's reason.
@@ -61,6 +62,19 @@ translated from. お天気 (entry 1002470), whose senses are "weather" and "mood
 
 If JMdict later rewords a sense, `eng` no longer matches it: the check flags the entry for review, and apps skip it
 until it's updated.
+
+## Machine translations
+
+`data/<code>_machine.json` (same format) holds machine translations for words that have no translation in JMdict or
+in the main file, every entry `"source": "machine"`, `"status": "pending"`. They are kept apart from the main file,
+which holds only what people wrote or checked: a machine translation is approved by moving it into the main file
+(`tools/promote.py`) and reviewing it there like any submission. Releases include both files; an app using them
+should show a machine translation marked as one, and prefer, in order: the main file's approved translations,
+JMdict's own, the machine translations, then English. The check flags a machine translation whose English JMdict has
+since changed (to translate again) and one the main file has since approved (to remove).
+
+Machine translations are made from the Japanese word, its readings and parts of speech and the English senses
+together, one JMdict sense at a time, following the writing rules below.
 
 ## How a translation is written
 
