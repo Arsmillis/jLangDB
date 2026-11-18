@@ -10,3 +10,5 @@ file format has its own version (`"format"` in each file), which changes only wh
   agreement) and how they are reviewed (REVIEWING.md).
 - A separate file for machine translations, `data/spa_machine.json` (empty for now): unreviewed, kept apart from the
   translations people wrote or approved, and moved into `data/spa.json` to be reviewed (`tools/promote.py`).
+- Every entry names its word (`"word": "お天気【おてんき】"`), so the files can be read without looking up JMdict ids;
+  `tools/format.py --jmdict` fills it in.

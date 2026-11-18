@@ -9,11 +9,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 import check  # noqa: E402
 
 # お天気 in JMdict: two senses
-JMDICT = {"1002470": [["weather"], ["mood", "temper"]]}
+JMDICT = {"1002470": {"word": "お天気【おてんき】", "senses": [["weather"], ["mood", "temper"]]}}
 
 
 def entry(**changes):
-    e = {"senses": [{"eng": ["weather"], "spa": ["tiempo (atmosférico)"]},
+    e = {"word": "お天気【おてんき】",
+         "senses": [{"eng": ["weather"], "spa": ["tiempo (atmosférico)"]},
                     {"eng": ["mood", "temper"], "spa": ["humor", "estado de ánimo"]}],
          "status": "pending", "source": "player", "refs": [], "comment": ""}
     e.update(changes)
@@ -100,6 +101,33 @@ class CheckTest(unittest.TestCase):
         check.check_leftovers(report, {"spa.json": {"1002470": entry(status="approved")},
                                        "spa_machine.json": {"1002470": entry(source="machine")}})
         self.assertEqual(len(report.warnings), 1)
+
+
+class WordTest(unittest.TestCase):
+    def test_every_entry_has_its_word(self):
+        e = entry()
+        del e["word"]
+        self.assertNotEqual(run({"1002470": e}).errors, [])
+
+    def test_a_word_jmdict_no_longer_uses_is_flagged(self):
+        report = run({"1002470": entry(word="御天気【おてんき】")}, JMDICT)
+        self.assertEqual((report.errors, len(report.warnings)), ([], 1))
+
+    def test_headword(self):
+        word = lambda kanji, kana: {"kanji": [{"text": k} for k in kanji],
+                                    "kana": [{"text": t, "appliesToKanji": a} for t, a in kana]}
+        self.assertEqual(check.headword(word(["お天気"], [("おてんき", ["*"])])), "お天気【おてんき】")
+        self.assertEqual(check.headword(word([], [("しまった", ["*"])])), "しまった")
+        # The first reading that applies to the first written form
+        self.assertEqual(check.headword(word(["上手"], [("うわて", ["上手い"]), ("じょうず", ["上手"])])),
+                         "上手【じょうず】")
+
+    def test_the_layout_puts_the_word_first(self):
+        e = entry()
+        del e["word"]
+        e["word"] = "お天気【おてんき】"
+        text = check.dump({"format": 1, "entries": {"1002470": e}})
+        self.assertLess(text.index('"word"'), text.index('"senses"'))
 
 
 class PromoteTest(unittest.TestCase):

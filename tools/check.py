@@ -23,7 +23,9 @@ FORMAT = 1
 STATUSES = ("pending", "approved", "rejected")
 SOURCES = ("player", "machine", "maintainer")
 GLOSS_TYPES = ("lit", "fig", "expl", "tm")
-ENTRY_KEYS = {"senses", "status", "source", "refs", "comment", "submitter"}
+# An entry's fields, in the order the standard layout writes them. "word" is JMdict's headword, for people reading the
+# file (apps go by the id): its first written form and reading, as tools/format.py --jmdict writes it
+ENTRY_KEYS = ("word", "senses", "status", "source", "refs", "comment", "submitter")
 # Leading articles, which a gloss leaves out unless it needs one (Spanish; a file for another language would add its
 # own)
 ARTICLES = {"spa": ("el", "la", "los", "las", "un", "una", "unos", "unas")}
@@ -78,11 +80,14 @@ def check_entry(report, name, lang, eid, entry, machine=False):
     if not isinstance(entry, dict):
         report.error(where, "an entry is an object")
         return
-    for key in set(entry) - ENTRY_KEYS:
+    for key in set(entry) - set(ENTRY_KEYS):
         report.error(where, f"unknown field {key!r}")
-    for key in ("senses", "status", "source"):
+    for key in ("word", "senses", "status", "source"):
         if key not in entry:
-            report.error(where, f"missing {key!r}")
+            report.error(where, f"missing {key!r}" + (" (python tools/format.py --jmdict ... fills it)"
+                                                       if key == "word" else ""))
+    if not isinstance(entry.get("word", ""), str):
+        report.error(where, "word is a string: JMdict's headword")
     if entry.get("status") not in STATUSES:
         report.error(where, f"status is one of {', '.join(STATUSES)}")
     if entry.get("source") not in SOURCES:
@@ -118,7 +123,19 @@ def check_entry(report, name, lang, eid, entry, machine=False):
             check_gloss(report, at, lang, gloss, i == len(glosses) - 1)
 
 
-# JMdict's English, by entry id: [[glosses of sense 1], [sense 2]...], from jmdict-simplified's English edition
+# An entry's headword as people read it: its first written form with the first reading that applies to it,
+# "お天気【おてんき】", or its first reading alone for a word written in kana
+def headword(w):
+    if not w["kanji"]:
+        return w["kana"][0]["text"]
+    form = w["kanji"][0]["text"]
+    reading = next((k["text"] for k in w["kana"] if "*" in k["appliesToKanji"] or form in k["appliesToKanji"]),
+                   w["kana"][0]["text"])
+    return f"{form}【{reading}】"
+
+
+# JMdict by entry id: {"word": headword, "senses": [[English glosses of sense 1], [sense 2]...]}, from
+# jmdict-simplified's English edition
 def load_jmdict(path):
     path = Path(path)
     if path.suffix == ".zip":
@@ -126,7 +143,8 @@ def load_jmdict(path):
             data = json.loads(z.read(z.namelist()[0]))
     else:
         data = json.loads(path.read_text(encoding="utf-8"))
-    return {w["id"]: [[g["text"] for g in s["gloss"] if g["lang"] == "eng"] for s in w["sense"]]
+    return {w["id"]: {"word": headword(w),
+                      "senses": [[g["text"] for g in s["gloss"] if g["lang"] == "eng"] for s in w["sense"]]}
             for w in data["words"]}
 
 
@@ -139,10 +157,14 @@ def check_against_jmdict(report, name, entries, jmdict, machine=False):
             continue
         flag = report.error if entry.get("status") == "pending" and not machine else report.warn
         where = f"{name} {eid}"
-        english = jmdict.get(eid)
-        if english is None:
+        found = jmdict.get(eid)
+        if found is None:
             flag(where, "not in JMdict (removed or merged?)")
-        elif len(entry["senses"]) != len(english):
+            continue
+        english = found["senses"]
+        if entry.get("word") != found["word"]:
+            report.warn(where, f"JMdict's headword is {found['word']} (python tools/format.py --jmdict ... updates it)")
+        if len(entry["senses"]) != len(english):
             flag(where, f"{len(entry['senses'])} senses, JMdict has {len(english)}")
         else:
             for n, (sense, eng) in enumerate(zip(entry["senses"], english), start=1):
@@ -187,7 +209,13 @@ def check_leftovers(report, files):
 
 # A file's text in the standard layout
 def dump(data):
+    def ordered(entry):    # the known fields in ENTRY_KEYS' order, then any others (which the check reports)
+        if not isinstance(entry, dict):
+            return entry
+        known = {k: entry[k] for k in ENTRY_KEYS if k in entry}
+        return {**known, **{k: v for k, v in entry.items() if k not in ENTRY_KEYS}}
     entries = dict(sorted(data["entries"].items(), key=lambda item: int(item[0]) if item[0].isdigit() else -1))
+    entries = {eid: ordered(entry) for eid, entry in entries.items()}
     return json.dumps({"format": data["format"], "entries": entries}, ensure_ascii=False, indent=2) + "\n"
 
 

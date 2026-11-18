@@ -12,8 +12,9 @@ they gave one, as `submitter`), so that it can be reviewed as a pull request lik
 the pull request and closed when it merges. Only submissions that agreed to the licence (CC BY-SA 4.0) are taken.
 
 The Check workflow runs on every pull request. Its errors are fixed before review (by the submitter, or by the
-reviewer for small things such as the layout: `python tools/format.py`). Its warnings (a leading article, a capital,
-a full stop) are for the reviewer to judge: some glosses need them.
+reviewer for small things such as the layout and the `word` field:
+`python tools/format.py --jmdict jmdict-eng.json.zip`). Its warnings (a leading article, a capital, a full stop) are
+for the reviewer to judge: some glosses need them.
 
 ## Each entry
 

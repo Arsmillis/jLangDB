@@ -12,14 +12,17 @@ full plan and the reasoning behind it.
 - `data/<code>.json`: one file per language (JMdict's ISO 639-2 code: `spa`). Format version in `"format"`; a format
   change needs a new version, a matching change in Kanji Lens's `build_dict.py`, and a note in README.md.
 - `tools/check.py` (the format and editorial rules; `--jmdict` adds the comparison with today's JMdict),
-  `tools/format.py` (the standard layout), `tools/fetch_jmdict.py`. Standard library only: no dependencies.
+  `tools/format.py` (the standard layout; `--jmdict` fills each entry's readable `word`), `tools/fetch_jmdict.py`.
+  Standard library only: no dependencies.
 - `tests/`: `python -m unittest discover -s tests`.
 - Contributions: `.github/ISSUE_TEMPLATE/translations.yml` (the Send translations form) and
   `.github/pull_request_template.md` both carry the CC BY-SA 4.0 agreement; keep their wording in step with
   README.md's. REVIEWING.md is the maintainer's review process.
 
 ```
-python tools/fetch_jmdict.py && python tools/format.py && python tools/check.py --jmdict jmdict-eng.json.zip
+python tools/fetch_jmdict.py
+python tools/format.py --jmdict jmdict-eng.json.zip
+python tools/check.py --jmdict jmdict-eng.json.zip
 ```
 
 ## Conventions

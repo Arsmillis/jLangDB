@@ -25,6 +25,7 @@ body:
         if GitHub won't take it), or paste the entries you translated as JSON. Every entry is "pending".
       placeholder: |
         "1002470": {
+          "word": "お天気【おてんき】",
           "senses": [
             {"eng": ["weather"], "spa": ["tiempo (atmosférico)"]},
             {"eng": ["mood", "temper"], "spa": ["humor", "estado de ánimo"]}

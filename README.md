@@ -17,7 +17,7 @@ them.
 | `data/spa.json` | Spanish translations written or approved by people (one file per language, named by JMdict's language code, ISO 639-2) |
 | `data/spa_machine.json` | Spanish machine translations, for the words that have no Spanish yet; all unreviewed |
 | `tools/check.py` | Checks every file against the format and the rules below, and against today's JMdict |
-| `tools/format.py` | Rewrites the files in the standard layout (run it after editing one by hand) |
+| `tools/format.py` | Rewrites the files in the standard layout, and with `--jmdict` fills in each entry's `word` (run it after editing a file by hand) |
 | `tools/promote.py` | Moves machine translations into the main file for review, and clears the ones approved there |
 | `tools/fetch_jmdict.py` | Downloads the current English JMdict ([jmdict-simplified](https://github.com/scriptin/jmdict-simplified)), for the check |
 
@@ -35,6 +35,7 @@ translated from. お天気 (entry 1002470), whose senses are "weather" and "mood
   "format": 1,
   "entries": {
     "1002470": {
+      "word": "お天気【おてんき】",
       "senses": [
         {"eng": ["weather"], "spa": ["tiempo (atmosférico)"]},
         {"eng": ["mood", "temper"], "spa": ["humor", "estado de ánimo"]}
@@ -48,6 +49,8 @@ translated from. お天気 (entry 1002470), whose senses are "weather" and "mood
 }
 ```
 
+- **`word`**: the entry's headword, so people can read the file: JMdict's first written form with its reading, or
+  the reading alone for a word written in kana. Filled in from JMdict by `tools/format.py --jmdict`; apps go by the id.
 - **`senses`**: every sense of the entry, in JMdict's order. `eng` is JMdict's English for that sense, exactly; the
   other key (the file's language) is a list of glosses. A gloss is a string, or a typed one,
   `{"type": "lit", "text": "…"}`, with JMdict's gloss types: `lit` (literal, last in its sense), `fig` (figurative),
@@ -110,7 +113,7 @@ CC BY-SA 4.0 (below). Before sending a pull request:
 
 ```
 python tools/fetch_jmdict.py
-python tools/format.py
+python tools/format.py --jmdict jmdict-eng.json.zip
 python tools/check.py --jmdict jmdict-eng.json.zip
 ```
 
