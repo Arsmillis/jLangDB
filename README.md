@@ -21,8 +21,10 @@ them.
 | `tools/promote.py` | Moves machine translations into the main file for review, and clears the ones approved there |
 | `tools/fetch_jmdict.py` | Downloads the current English JMdict ([jmdict-simplified](https://github.com/scriptin/jmdict-simplified)), for the check |
 
-Releases (`jlangdb-v<X.Y.Z>.zip`: the files and the licence) are what apps download, at a pinned version. The maintainer
-publishes them with `tools/release.sh` (see CHANGELOG.md for what each one changed).
+Releases (`jlangdb-v<X.Y.Z>.zip`: the files and the licence) are what apps download: the newest release of the major
+version they read. The major version changes only when apps must change to read a release (a new format), so new
+translations reach them without an app update. The maintainer publishes them with `tools/release.sh` (see CHANGELOG.md
+for what each one changed).
 
 ## The format
 

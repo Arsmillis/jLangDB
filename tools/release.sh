@@ -4,7 +4,7 @@
 # Publish, or republish, the GitHub release for the version in VERSION (X.Y.Z, e.g. 0.1.0).
 #   tools/release.sh            test + check against today's JMdict, tag vX.Y.Z if needed, create or update the release
 #   tools/release.sh --dry-run  the same tests and checks, and write build/; change nothing on GitHub
-# Needs Python 3 and the GitHub CLI (gh), signed in with push access. Apps download jlangdb-vX.Y.Z.zip, pinned.
+# Needs Python 3 and the GitHub CLI (gh), with push access. Apps take the newest release of their major version.
 set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 cd "$ROOT"

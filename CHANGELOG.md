@@ -1,7 +1,8 @@
 # Changelog
 
-Each release is a version of the translation files (`jlangdb-v<X.Y.Z>.zip`); apps pin the version they use. The
-file format has its own version (`"format"` in each file), which changes only when the layout does.
+Each release is a version of the translation files (`jlangdb-v<X.Y.Z>.zip`); apps take the newest release of the major
+version they read, so the major version changes only when apps must change to read it. The file format has its own
+version (`"format"` in each file), which changes only when the layout does.
 
 ## [Unreleased]
 
