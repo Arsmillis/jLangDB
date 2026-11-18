@@ -33,11 +33,12 @@ python tools/check.py --jmdict jmdict-eng.json.zip
   English changed is a warning (apps skip it until it's re-reviewed).
 - Reviewing is the maintainer's: never mark an entry approved or rejected on your own; a machine translation is
   `"source": "machine"`, `"status": "pending"`.
-- Releases are deliberate and by hand, not by a workflow: `VERSION` holds the release number N; a release PR moves
-  CHANGELOG.md's `## [Unreleased]` entries under `## [N] - date` and bumps `VERSION`; once merged, the maintainer runs
+- Releases are deliberate and by hand, not by a workflow: `VERSION` holds the version X.Y.Z; a release PR moves
+  CHANGELOG.md's `## [Unreleased]` entries under `## [X.Y.Z] - date` and bumps `VERSION` (patch for fixes, minor for new
+  translations or tools, major when the format changes in a way apps must follow); once merged, the maintainer runs
   `tools/release.sh` on main (`--dry-run` first, on any branch), which tests, checks against today's JMdict, tags
-  `vN`, publishes `jlangdb-vN.zip` and verifies the upload. Never run it, tag or create releases unless asked. A PR
-  that changes the data or tools adds its entry under `## [Unreleased]`.
+  `vX.Y.Z`, publishes `jlangdb-vX.Y.Z.zip` and verifies the upload. Never run it, tag or create releases unless asked. A
+  PR that changes the data or tools adds its entry under `## [Unreleased]`.
 - Work on a branch per change and open a PR; the maintainer reviews and merges. Never push to main. Stage files by
   name, never `git add -A`.
 - Everything here is CC BY-SA 4.0 (credit the EDRDG); never add text from other dictionaries.

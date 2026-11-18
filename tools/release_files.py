@@ -30,7 +30,8 @@ def notes(version):
         statuses = [e.get("status") for e in json.loads(f.read_text(encoding="utf-8"))["entries"].values()]
         counts = " | ".join(str(statuses.count(s)) for s in ("approved", "pending", "rejected"))
         lines.append(f"| `{f.name}` | {counts} |")
-    lines += ["", "Apps use only the approved entries. Licence: CC BY-SA 4.0, adapted from JMdict (© EDRDG)."]
+    lines += ["", "Apps use the main files' approved entries, and show the machine translations (`*_machine.json`) marked "
+              "as such. Licence: CC BY-SA 4.0, adapted from JMdict (© EDRDG)."]
     return "\n".join(lines).strip() + "\n"
 
 

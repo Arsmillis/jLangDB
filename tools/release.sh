@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: CC-BY-SA-4.0
 # Copyright (C) 2026 Arsmillis (https://github.com/Arsmillis/jLangDB)
-# Publish, or republish, the GitHub release for the version in VERSION (a release number: 1, 2...).
-#   tools/release.sh            test + check against today's JMdict, tag vN if needed, create or update the release
+# Publish, or republish, the GitHub release for the version in VERSION (X.Y.Z, e.g. 0.1.0).
+#   tools/release.sh            test + check against today's JMdict, tag vX.Y.Z if needed, create or update the release
 #   tools/release.sh --dry-run  the same tests and checks, and write build/; change nothing on GitHub
-# Needs Python 3 and the GitHub CLI (gh), signed in with push access. Apps download jlangdb-vN.zip at a pinned N.
+# Needs Python 3 and the GitHub CLI (gh), signed in with push access. Apps download jlangdb-vX.Y.Z.zip, pinned.
 set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 cd "$ROOT"
@@ -29,7 +29,7 @@ START=$(git rev-parse HEAD)
 
 VERSION=$(tr -d '[:space:]' < VERSION)
 TAG="v$VERSION"
-[[ $VERSION =~ ^[1-9][0-9]*$ ]] || die "VERSION must be a release number (1, 2...), got '$VERSION'."
+[[ $VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || die "VERSION must be a version number X.Y.Z (e.g. 0.1.0), got '$VERSION'."
 grep -q "^## \[$VERSION\]" CHANGELOG.md ||
   die "CHANGELOG.md has no '## [$VERSION]' section. Move the Unreleased entries under it first."
 command -v gh >/dev/null || die "the GitHub CLI (gh) is needed: https://cli.github.com"
