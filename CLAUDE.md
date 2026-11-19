@@ -42,4 +42,9 @@ python tools/check.py --jmdict jmdict-eng.json.zip
   unless asked. A PR that changes the data or tools adds its entry under `## [Unreleased]`.
 - Work on a branch per change and open a PR; the maintainer reviews and merges. Never push to main. Stage files by
   name, never `git add -A`.
+- README.md's Progress table counts words (JMdict entries) with Spanish in at least one sense. Keep it up to date in any
+  PR that adds, approves or removes translations, and update its JMdict date: recount English entries from
+  `jmdict-eng.json.zip`, JMdict's own Spanish from jmdict-simplified's `jmdict-spa-*.json.zip` of the same release,
+  and the entries in `data/spa.json` and `data/spa_machine.json`; the "all together" row counts each word once (a
+  translation here can be a fuller one of a word JMdict already has in Spanish).
 - Everything here is CC BY-SA 4.0 (credit the EDRDG); never add text from other dictionaries.

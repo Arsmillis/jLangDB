@@ -26,6 +26,20 @@ version they read. The major version changes only when apps must change to read 
 translations reach them without an app update. The maintainer publishes them with `tools/release.sh` (see CHANGELOG.md
 for what each one changed).
 
+## Progress
+
+Spanish, against JMdict of 2026-11-16. A word (a JMdict entry) counts as having Spanish when at least one of its senses
+does, so some have only part of their meanings translated.
+
+| | Words |
+|---|---|
+| JMdict, in English | 219,127 |
+| JMdict's own Spanish | 34,311 |
+| Approved here (`data/spa.json`) | 0 |
+| Machine translations, unreviewed (`data/spa_machine.json`) | 6,800 |
+| **With Spanish, all together** | **41,111** (19%) |
+| **Still without Spanish** | **178,016** |
+
 ## The format
 
 A file translates JMdict's **senses** (meanings), keyed by JMdict entry id (`ent_seq`, which stays the same across
