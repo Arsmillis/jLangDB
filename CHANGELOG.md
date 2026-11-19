@@ -6,6 +6,11 @@ version (`"format"` in each file), which changes only when the layout does.
 
 ## [Unreleased]
 
+- Spanish machine translations for 8,889 more words JMdict has no Spanish for (12,088 senses), all waiting for
+  review: first the JLPT words still without Spanish (Jonathan Waller's lists, matched to JMdict by
+  yomitan-jlpt-vocab), then the most frequent words in wordfreq's Japanese list, skipping spellings another word
+  shares. Spanish now covers 50,000 JMdict words, JMdict's own and ours together.
+
 ## [0.1.0] - 2026-11-18
 
 - The format (version 1), its checks and the Spanish file, still empty: `data/spa.json`.
