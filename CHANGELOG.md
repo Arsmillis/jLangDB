@@ -6,6 +6,8 @@ version (`"format"` in each file), which changes only when the layout does.
 
 ## [Unreleased]
 
+- RESOURCES.md: every outside source used, with its licence, and which set of machine translations chose its words
+  from which list. README's Progress table brought up to date (50,000 words with Spanish).
 - Spanish machine translations for 8,889 more words JMdict has no Spanish for (12,088 senses), all waiting for
   review: first the JLPT words still without Spanish (Jonathan Waller's lists, matched to JMdict by
   yomitan-jlpt-vocab), then the most frequent words in wordfreq's Japanese list, skipping spellings another word

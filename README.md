@@ -20,6 +20,7 @@ them.
 | `tools/format.py` | Rewrites the files in the standard layout, and with `--jmdict` fills in each entry's `word` (run it after editing a file by hand) |
 | `tools/promote.py` | Moves machine translations into the main file for review, and clears the ones approved there |
 | `tools/fetch_jmdict.py` | Downloads the current English JMdict ([jmdict-simplified](https://github.com/scriptin/jmdict-simplified)), for the check |
+| `RESOURCES.md` | Every outside source used: to translate from, to choose which words to translate, and to measure what's missing |
 
 Releases (`jlangdb-v<X.Y.Z>.zip`: the files and the licence) are what apps download: the newest release of the major
 version they read. The major version changes only when apps must change to read a release (a new format), so new
@@ -36,9 +37,9 @@ does, so some have only part of their meanings translated.
 | JMdict, in English | 219,127 |
 | JMdict's own Spanish | 34,311 |
 | Approved here (`data/spa.json`) | 0 |
-| Machine translations, unreviewed (`data/spa_machine.json`) | 6,800 |
-| **With Spanish, all together** | **41,111** (19%) |
-| **Still without Spanish** | **178,016** |
+| Machine translations, unreviewed (`data/spa_machine.json`) | 15,689 |
+| **With Spanish, all together** | **50,000** (23%) |
+| **Still without Spanish** | **169,127** |
 
 ## The format
 
