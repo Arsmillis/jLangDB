@@ -8,6 +8,7 @@ version (`"format"` in each file), which changes only when the layout does.
 
 ## [0.1.1] - 2026-11-25
 
+- `tools/check.py` no longer reports a missing or extra newline at the end of a file as a layout error.
 - Spanish machine translations for 1,056 words common in video games (1,395 senses), all waiting for review:
   every word in the top 10,000 of Jiten's video game frequency list that had no Spanish (see RESOURCES.md).
   Spanish now covers 51,058 JMdict words.

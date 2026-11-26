@@ -81,6 +81,17 @@ class CheckTest(unittest.TestCase):
     def test_layout(self):
         self.assertNotEqual(run({"1002470": entry()}, layout=False).errors, [])
 
+    # A missing or extra newline at the end of the file is not a layout error
+    def test_the_file_ending_does_not_matter(self):
+        text = check.dump({"format": 1, "entries": {"1002470": entry()}})
+        for ending in ("", "\n\n", "\n  \n"):
+            with tempfile.TemporaryDirectory() as tmp:
+                path = Path(tmp) / "spa.json"
+                path.write_text(text.rstrip() + ending, encoding="utf-8")
+                report = check.Report()
+                check.check_file(report, path)
+                self.assertEqual(report.errors, [], repr(ending))
+
     def test_file_names(self):
         self.assertEqual(run({}, name="spa_machine.json").errors, [])
         self.assertNotEqual(run({}, name="spanish.json").errors, [])
