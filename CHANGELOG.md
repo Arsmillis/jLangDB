@@ -6,6 +6,9 @@ version (`"format"` in each file), which changes only when the layout does.
 
 ## [Unreleased]
 
+- Spanish machine translations for 1,056 words common in video games (1,395 senses), all waiting for review:
+  every word in the top 10,000 of Jiten's video game frequency list that had no Spanish (see RESOURCES.md).
+  Spanish now covers 51,058 JMdict words.
 - RESOURCES.md: every outside source used, with its licence, and which set of machine translations chose its words
   from which list. README's Progress table brought up to date (50,000 words with Spanish).
 - Spanish machine translations for 8,889 more words JMdict has no Spanish for (12,088 senses), all waiting for

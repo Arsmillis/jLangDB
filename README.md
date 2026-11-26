@@ -29,17 +29,17 @@ for what each one changed).
 
 ## Progress
 
-Spanish, against JMdict of 2026-11-16. A word (a JMdict entry) counts as having Spanish when at least one of its senses
+Spanish, against JMdict of 2026-11-23. A word (a JMdict entry) counts as having Spanish when at least one of its senses
 does, so some have only part of their meanings translated.
 
 | | Words |
 |---|---|
-| JMdict, in English | 219,127 |
-| JMdict's own Spanish | 34,311 |
+| JMdict, in English | 219,205 |
+| JMdict's own Spanish | 34,313 |
 | Approved here (`data/spa.json`) | 0 |
-| Machine translations, unreviewed (`data/spa_machine.json`) | 15,689 |
-| **With Spanish, all together** | **50,000** (23%) |
-| **Still without Spanish** | **169,127** |
+| Machine translations, unreviewed (`data/spa_machine.json`) | 16,745 |
+| **With Spanish, all together** | **51,058** (23%) |
+| **Still without Spanish** | **168,147** |
 
 ## The format
 
