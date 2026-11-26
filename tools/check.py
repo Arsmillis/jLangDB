@@ -188,8 +188,10 @@ def check_file(report, path):
         return {}
     for key in set(data) - {"format", "entries"}:
         report.error(name, f"unknown field {key!r}")
-    # Written as the tools write it, so a change shows as a small diff: sorted ids, two-space indent, real characters
-    if path.read_text(encoding="utf-8") != dump(data):
+    # Written as the tools write it, so a change shows as a small diff: sorted ids, two-space indent, real characters.
+    # Whitespace after the closing brace doesn't count: editors and git add or drop the final newline, and that
+    # changes nothing in the data or in a diff worth reading
+    if path.read_text(encoding="utf-8").rstrip() + "\n" != dump(data):
         report.error(name, "not in the standard layout: run python tools/format.py")
     for eid, entry in data["entries"].items():
         check_entry(report, name, lang, eid, entry, machine)
