@@ -20,6 +20,7 @@ them.
 | `tools/format.py` | Rewrites the files in the standard layout, and with `--jmdict` fills in each entry's `word` (run it after editing a file by hand) |
 | `tools/promote.py` | Moves machine translations into the main file for review, and clears the ones approved there |
 | `tools/fetch_jmdict.py` | Downloads the current English JMdict ([jmdict-simplified](https://github.com/scriptin/jmdict-simplified)), for the check |
+| `review/jmdict_english.json` | Places where JMdict's own English looks wrong or unclear, found while translating: to check, and to report to JMdict |
 | `RESOURCES.md` | Every outside source used: to translate from, to choose which words to translate, and to measure what's missing |
 
 Releases (`jlangdb-v<X.Y.Z>.zip`: the files and the licence) are what apps download: the newest release of the major
@@ -95,6 +96,36 @@ since changed (to translate again) and one the main file has since approved (to 
 
 Machine translations are made from the Japanese word, its readings and parts of speech and the English senses
 together, one JMdict sense at a time, following the writing rules below.
+
+## Questionable English in JMdict
+
+Translating sometimes turns up English in JMdict that looks wrong: a typo, a gloss that doesn't fit the word, English
+too vague to translate safely, a tag that doesn't fit the glosses, or a missing meaning. Each is noted in
+`review/jmdict_english.json`, so they can be checked together and the real ones reported to JMdict, as well as in the
+entry's `comment`:
+
+```json
+{
+  "entries": {
+    "2842389": {
+      "word": "可哀想に【かわいそうに】",
+      "notes": [
+        {"sense": 1, "eng": ["poor thing!", "pour soul!", "what a pity!"], "kind": "typo",
+         "note": "\"pour soul\" for \"poor soul\".", "found": "2026-11-25"}
+      ]
+    }
+  }
+}
+```
+
+- **`sense`**: the JMdict sense (from 1), and **`eng`** its English as it was when noted.
+- **`kind`**: `typo`, `wrong` (a gloss whose meaning looks wrong), `unclear`, `tags` (a part of speech or other tag
+  that doesn't fit the glosses) or `missing` (a meaning JMdict doesn't have).
+- **`note`**: what looks wrong, in a line; **`found`**: the date.
+
+The file isn't part of releases. `tools/check.py --jmdict` warns when a sense's English has changed since its note,
+which usually means JMdict has fixed it: check, and remove the note. A note is only a suspicion until it's checked
+against the Japanese, and the translation follows JMdict's English meanwhile.
 
 ## How a translation is written
 

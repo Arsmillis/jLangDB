@@ -141,6 +141,43 @@ class WordTest(unittest.TestCase):
         self.assertLess(text.index('"word"'), text.index('"senses"'))
 
 
+# Check a review/jmdict_english.json holding `entries`, written in the standard layout unless layout is False
+def run_review(entries, jmdict=None, layout=True):
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "jmdict_english.json"
+        data = {"entries": entries}
+        path.write_text(check.dump_review(data) if layout else json.dumps(data), encoding="utf-8")
+        report = check.Report()
+        check.check_review(report, path, jmdict)
+        return report
+
+
+def note(**changes):
+    n = {"sense": 2, "eng": ["mood", "temper"], "kind": "unclear", "note": "Example.", "found": "2026-11-28"}
+    n.update(changes)
+    return n
+
+
+class ReviewTest(unittest.TestCase):
+    def test_a_good_note_passes(self):
+        report = run_review({"1002470": {"word": "お天気【おてんき】", "notes": [note()]}}, JMDICT)
+        self.assertEqual((report.errors, report.warnings), ([], []))
+
+    def test_a_malformed_note_is_an_error(self):
+        for bad in (note(kind="style"), note(sense=0), note(note=" "), note(found="soon"), {"sense": 1}):
+            self.assertNotEqual(run_review({"1002470": {"word": "", "notes": [bad]}}).errors, [], bad)
+        self.assertNotEqual(run_review({"1002470": {"word": "", "notes": []}}).errors, [])
+        self.assertNotEqual(run_review({"1002470": {"word": "", "notes": [note()]}}, layout=False).errors, [])
+
+    # When JMdict's English changes, the problem may be fixed: a warning, to look and remove the note
+    def test_a_note_whose_english_changed_is_flagged(self):
+        for changed in (note(eng=["mood"]), note(sense=3)):
+            report = run_review({"1002470": {"word": "", "notes": [changed]}}, JMDICT)
+            self.assertEqual(report.errors, [])
+            self.assertNotEqual(report.warnings, [])
+        self.assertNotEqual(run_review({"9999999": {"word": "", "notes": [note()]}}, JMDICT).warnings, [])
+
+
 class PromoteTest(unittest.TestCase):
     def test_promote_and_clear(self):
         import promote

@@ -49,6 +49,11 @@ approved entries whose `eng` no longer matches (apps skip them meanwhile). Each 
 the translation to match the new senses and approve it again, or reject it if it no longer fits. An entry JMdict has
 removed is rejected with that reason.
 
+`review/jmdict_english.json` lists the English in JMdict that looked wrong while translating. Check each note against
+the Japanese; report the real ones to JMdict (with references, through
+[JMdictDB](https://www.edrdg.org/jmdictdb/index.html)) and remove the rest. When the check warns that a note's
+English has changed, JMdict has probably fixed it: retranslate that sense and remove the note.
+
 ## Merging and releasing
 
 Merge the pull request once every entry in it is approved, rejected, or deliberately left pending. The decisions go

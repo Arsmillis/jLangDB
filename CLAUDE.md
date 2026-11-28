@@ -47,6 +47,9 @@ python tools/check.py --jmdict jmdict-eng.json.zip
   `jmdict-eng.json.zip`, JMdict's own Spanish from jmdict-simplified's `jmdict-spa-*.json.zip` of the same release,
   and the entries in `data/spa.json` and `data/spa_machine.json`; the "all together" row counts each word once (a
   translation here can be a fuller one of a word JMdict already has in Spanish).
+- `review/jmdict_english.json`: where JMdict's own English looks wrong (README "Questionable English in JMdict").
+  When translating turns up one, note it there as well as in the entry's `comment`, with the sense, its English and
+  the date; `tools/format.py --jmdict` fills each entry's `word`. It's not in releases.
 - RESOURCES.md lists every outside source used (to translate from, to choose words, to measure coverage), with its
   licence and download date. Add a source there in the same PR that first uses it, and record which list each new
   set of machine translations chose its words from. Check a source's licence before using it: CC BY-SA 4.0 or more
