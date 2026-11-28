@@ -37,9 +37,9 @@ does, so some have only part of their meanings translated.
 | JMdict, in English | 219,205 |
 | JMdict's own Spanish | 34,313 |
 | Approved here (`data/spa.json`) | 0 |
-| Machine translations, unreviewed (`data/spa_machine.json`) | 16,745 |
-| **With Spanish, all together** | **51,058** (23%) |
-| **Still without Spanish** | **168,147** |
+| Machine translations, unreviewed (`data/spa_machine.json`) | 18,902 |
+| **With Spanish, all together** | **53,215** (24%) |
+| **Still without Spanish** | **165,990** |
 
 ## The format
 
