@@ -6,6 +6,9 @@ version (`"format"` in each file), which changes only when the layout does.
 
 ## [Unreleased]
 
+- 11 Spanish machine translations brought up to date with JMdict of 2026-11-23, which added senses to 9 of them
+  and reworded 2 (いい, 方がいい, ダッシュ, 持ち出す and others): apps had been skipping them.
+
 ## [0.1.1] - 2026-11-25
 
 - `tools/check.py` no longer reports a missing or extra newline at the end of a file as a layout error.

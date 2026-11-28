@@ -26587,19 +26587,40 @@
       "senses": [
         {
           "eng": [
-            "dash"
+            "dash",
+            "space"
+          ],
+          "spa": [
+            "guion largo (—)",
+            "raya",
+            "espacio"
+          ]
+        },
+        {
+          "eng": [
+            "prime symbol (')"
+          ],
+          "spa": [
+            "símbolo de prima (')"
+          ]
+        },
+        {
+          "eng": [
+            "dash",
+            "rapid movement"
           ],
           "spa": [
             "carrera rápida",
+            "esprint",
             "arranque",
-            "guion largo (—)"
+            "movimiento rápido"
           ]
         }
       ],
       "status": "pending",
       "source": "machine",
       "refs": [],
-      "comment": "The English is only \"dash\": the run, the punctuation mark, etc."
+      "comment": "Sense 2 is mathematics. JMdict's \"space\" beside \"dash\" in sense 1 is unclear; translated as given."
     },
     "1077070": {
       "word": "ダッチワイフ",
@@ -79989,12 +80010,22 @@
             "anticipar",
             "subir"
           ]
+        },
+        {
+          "eng": [
+            "to carry (a digit to the next place in addition)",
+            "to round up"
+          ],
+          "spa": [
+            "llevar (una cifra a la columna siguiente en una suma)",
+            "redondear al alza"
+          ]
         }
       ],
       "status": "pending",
       "source": "machine",
       "refs": [],
-      "comment": ""
+      "comment": "Sense 2 is mathematics."
     },
     "1247120": {
       "word": "桑田【そうでん】",
@@ -103359,6 +103390,28 @@
             "mencionar",
             "sacar a relucir (un tema)",
             "plantear (una cuestión)"
+          ]
+        },
+        {
+          "eng": [
+            "to cover (a shortfall) out of one's own funds",
+            "to pay out of one's own pocket"
+          ],
+          "spa": [
+            "cubrir (un déficit) con fondos propios",
+            "pagar de su bolsillo"
+          ]
+        },
+        {
+          "eng": [
+            "to embezzle",
+            "to peculate",
+            "to make off with (e.g. employer's money)"
+          ],
+          "spa": [
+            "malversar",
+            "desfalcar",
+            "llevarse (p. ej. dinero de la empresa)"
           ]
         }
       ],
@@ -145759,9 +145812,13 @@
           "eng": [
             "mid-range",
             "mid-scale",
-            "mid-size"
+            "mid-size",
+            "medium-range",
+            "medium-scale",
+            "medium-size"
           ],
           "spa": [
+            "de gama media",
             "de escala media",
             "mediano",
             "de tamaño medio"
@@ -211218,11 +211275,13 @@
         {
           "eng": [
             "bring-your-own (e.g. food and drink)",
-            "carry-on (e.g. luggage)"
+            "carry-on (e.g. luggage)",
+            "unsolicited (e.g. submission of one's work)"
           ],
           "spa": [
             "llevar uno mismo (p. ej. comida y bebida)",
-            "equipaje de mano"
+            "equipaje de mano",
+            "no solicitado (p. ej. un trabajo presentado por iniciativa propia)"
           ]
         }
       ],
@@ -274535,12 +274594,24 @@
             "sin marca",
             "genérico"
           ]
+        },
+        {
+          "eng": [
+            "unfavoured competitor",
+            "outsider",
+            "wild-card"
+          ],
+          "spa": [
+            "competidor no favorito",
+            "outsider",
+            "comodín"
+          ]
         }
       ],
       "status": "pending",
       "source": "machine",
       "refs": [],
-      "comment": ""
+      "comment": "Sense 2 is sports: horse racing, cycle racing, etc."
     },
     "2001230": {
       "word": "無党派層【むとうはそう】",
@@ -297263,6 +297334,18 @@
             "¡pero qué!",
             "¡maldita sea!"
           ]
+        },
+        {
+          "eng": [
+            "well",
+            "um",
+            "you know"
+          ],
+          "spa": [
+            "bueno…",
+            "esto…",
+            "o sea"
+          ]
         }
       ],
       "status": "pending",
@@ -303102,8 +303185,8 @@
             "had better ..."
           ],
           "spa": [
-            "más vale ...",
-            "mejor ..."
+            "más vale …",
+            "mejor …"
           ]
         },
         {
@@ -303111,15 +303194,27 @@
             "had better not ..."
           ],
           "spa": [
-            "más vale no ...",
-            "mejor no ..."
+            "más vale no …",
+            "mejor no …"
+          ]
+        },
+        {
+          "eng": [
+            "is better (than the alternative)",
+            "is preferable",
+            "it is better to ..."
+          ],
+          "spa": [
+            "ser mejor (que la alternativa)",
+            "ser preferible",
+            "es mejor …"
           ]
         }
       ],
       "status": "pending",
       "source": "machine",
       "refs": [],
-      "comment": ""
+      "comment": "Sense 1 after a past-tense verb, sense 2 after a negative verb, sense 3 usually after noun + の or a verb."
     },
     "2162210": {
       "word": "糞爺【くそじじい】",
@@ -325937,12 +326032,20 @@
             "papi",
             "pa"
           ]
+        },
+        {
+          "eng": [
+            "husband"
+          ],
+          "spa": [
+            "marido"
+          ]
         }
       ],
       "status": "pending",
       "source": "machine",
       "refs": [],
-      "comment": "Children's language (chn)."
+      "comment": "Sense 1 is children's language (chn); sense 2 is colloquial and familiar (col, fam)."
     },
     "2519240": {
       "word": "敷き【しき】",
@@ -326428,6 +326531,17 @@
           "spa": [
             "con un crujido (p. ej. de ramas, de nudillos)",
             "¡crac!"
+          ]
+        },
+        {
+          "eng": [
+            "briskly",
+            "efficiently"
+          ],
+          "spa": [
+            "con energía",
+            "con eficiencia",
+            "con soltura"
           ]
         }
       ],
@@ -346814,12 +346928,24 @@
             "de acuerdo",
             "no hay problema"
           ]
+        },
+        {
+          "eng": [
+            "no thank you",
+            "I don't need it",
+            "there's no need"
+          ],
+          "spa": [
+            "no, gracias",
+            "no lo necesito",
+            "no hace falta"
+          ]
         }
       ],
       "status": "pending",
       "source": "machine",
       "refs": [],
-      "comment": ""
+      "comment": "Sense 5 is usually いいです."
     },
     "2820780": {
       "word": "クラウドファンディング",
