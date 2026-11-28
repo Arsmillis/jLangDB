@@ -6,6 +6,8 @@ version (`"format"` in each file), which changes only when the layout does.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-28
+
 - `review/jmdict_english.json`: the 78 places where JMdict's English looked wrong or unclear while translating,
   in one file to check and report to JMdict (README, "Questionable English in JMdict"). `tools/check.py` checks it,
   and with `--jmdict` warns when a noted sense's English has changed (likely fixed); `tools/format.py` formats it.
