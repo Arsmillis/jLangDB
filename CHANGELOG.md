@@ -6,6 +6,9 @@ version (`"format"` in each file), which changes only when the layout does.
 
 ## [Unreleased]
 
+- Spanish machine translations for 2,157 more words common in video games (2,648 senses), all waiting for
+  review: every word ranked 10,001 to 20,000 in Jiten's video game frequency list that had no Spanish. Spanish now
+  covers 53,215 JMdict words.
 - 11 Spanish machine translations brought up to date with JMdict of 2026-11-23, which added senses to 9 of them
   and reworded 2 (いい, 方がいい, ダッシュ, 持ち出す and others): apps had been skipping them.
 
