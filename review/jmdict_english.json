@@ -1,0 +1,1221 @@
+{
+  "entries": {
+    "1006840": {
+      "word": "その上で【そのうえで】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "moreover",
+            "in addition"
+          ],
+          "kind": "missing",
+          "note": "Only \"moreover / in addition\"; the common \"after that, on that basis\" (〜た上で) is missing.",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "1069440": {
+      "word": "スターリングエンジン",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "Sterling engine"
+          ],
+          "kind": "typo",
+          "note": "Spelled \"Sterling\"; the engine is the Stirling engine.",
+          "found": "2026-11-18"
+        }
+      ]
+    },
+    "1095850": {
+      "word": "ハスキー",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "husky",
+            "huskie"
+          ],
+          "kind": "typo",
+          "note": "\"huskie\" is the dog; the adjective (a husky voice) is \"husky\".",
+          "found": "2026-11-18"
+        }
+      ]
+    },
+    "1115100": {
+      "word": "ブンド",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "bond"
+          ],
+          "kind": "unclear",
+          "note": "ブンド is from German Bund; \"bond\" reads as the English word.",
+          "found": "2026-11-18"
+        }
+      ]
+    },
+    "1187310": {
+      "word": "仮にも【かりにも】",
+      "notes": [
+        {
+          "sense": 2,
+          "eng": [
+            "at any rate",
+            "at the very least",
+            "if ... at all",
+            "even in the slightest sense"
+          ],
+          "kind": "unclear",
+          "note": "Sense 2 (\"if ... at all / even in the slightest sense\") is awkward.",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "1215250": {
+      "word": "間にある【あいだにある】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "intervening"
+          ],
+          "kind": "unclear",
+          "note": "Only \"intervening\".",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "1366320": {
+      "word": "震え上がる【ふるえあがる】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "to tremble violently",
+            "to shudder up",
+            "to shake"
+          ],
+          "kind": "typo",
+          "note": "\"to shudder up\" is not natural English.",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "1366940": {
+      "word": "人間同士【にんげんどうし】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "mankind",
+            "the human creature",
+            "fellow creatures"
+          ],
+          "kind": "wrong",
+          "note": "\"mankind / fellow creatures\" doesn't fit 同士: \"between humans, fellow humans\".",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "1368570": {
+      "word": "人騒がせ【ひとさわがせ】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "person that annoys or causes trouble",
+            "false alarm"
+          ],
+          "kind": "tags",
+          "note": "Tagged adj-na,n, but both glosses are nouns: a person and an event.",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "1406910": {
+      "word": "他のもの【ほかのもの】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "another thing",
+            "other things",
+            "another man's property"
+          ],
+          "kind": "unclear",
+          "note": "\"another man's property\" is an odd fit beside \"other things\".",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "1498470": {
+      "word": "武器庫【ぶきこ】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "armory",
+            "armoury",
+            "ordnance department"
+          ],
+          "kind": "wrong",
+          "note": "\"ordnance department\" is a different thing from \"armory\".",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "1551860": {
+      "word": "立法府【りっぽうふ】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "assize",
+            "court"
+          ],
+          "kind": "wrong",
+          "note": "\"assize, court\" is judicial, odd for 立法府 (the legislature).",
+          "found": "2026-11-18"
+        }
+      ]
+    },
+    "1559230": {
+      "word": "連【れん】",
+      "notes": [
+        {
+          "sense": 7,
+          "eng": [
+            "falcon"
+          ],
+          "kind": "unclear",
+          "note": "Sense 7 \"falcon\" is a counter for falcons, which the English doesn't say.",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "1616370": {
+      "word": "嬉しそう【うれしそう】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "delightful",
+            "glad-looking"
+          ],
+          "kind": "wrong",
+          "note": "\"delightful\" should probably be \"delighted(-looking)\".",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "1640370": {
+      "word": "首になる【くびになる】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "to be sacked",
+            "to be fired",
+            "to be dismissed"
+          ],
+          "kind": "tags",
+          "note": "The uk tag is on both senses; it probably belongs only to sense 1 (クビになる).",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "1643370": {
+      "word": "盗み聞き【ぬすみぎき】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "eavesdropping",
+            "tapping"
+          ],
+          "kind": "unclear",
+          "note": "\"tapping\" (wiretapping) is unclear for 盗み聞き (eavesdropping).",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "1699490": {
+      "word": "手駒【てごま】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "(game pieces, soldiers, etc.) under one's control"
+          ],
+          "kind": "unclear",
+          "note": "The only gloss has no head noun: \"(game pieces, soldiers, etc.) under one's control\".",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "1706150": {
+      "word": "実体化【じったいか】",
+      "notes": [
+        {
+          "sense": 2,
+          "eng": [
+            "(specific to object language classes) instantiation"
+          ],
+          "kind": "unclear",
+          "note": "\"(specific to object language classes)\": probably object-oriented language classes.",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "1711070": {
+      "word": "百年【ひゃくねん】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "century",
+            "hundred years",
+            "a long time"
+          ],
+          "kind": "tags",
+          "note": "\"[figurative] a long time\" is written inline instead of as a figurative gloss.",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "1780120": {
+      "word": "機械仕掛け【きかいじかけ】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "mechanism",
+            "mechanical parts",
+            "jack-in-the-box"
+          ],
+          "kind": "wrong",
+          "note": "\"jack-in-the-box\" is out of place beside \"mechanism / mechanical parts\".",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "1897720": {
+      "word": "とどめを刺す【とどめをさす】",
+      "notes": [
+        {
+          "sense": 3,
+          "eng": [
+            "to be the best for A"
+          ],
+          "kind": "unclear",
+          "note": "\"to be the best for A\" is vague.",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "1987300": {
+      "word": "デイサービス",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "nursing in the home by visiting nurses"
+          ],
+          "kind": "wrong",
+          "note": "デイサービス usually means day services (day care) for the elderly.",
+          "found": "2026-11-19"
+        }
+      ]
+    },
+    "2018310": {
+      "word": "方がマシ【ほうがマシ】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "I would rather",
+            "I would as lief do",
+            "strong preference"
+          ],
+          "kind": "unclear",
+          "note": "\"strong preference\" is a description, and \"I would as lief do\" is archaic English.",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2028260": {
+      "word": "どうするか",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "what would (you) do?",
+            "what to do about it"
+          ],
+          "kind": "unclear",
+          "note": "Mixes a question (\"what would (you) do?\") with a phrase (\"what to do about it\").",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2034480": {
+      "word": "身につく【みにつく】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "to master (e.g. a skill)",
+            "to become accustomed to (e.g. a lifestyle)",
+            "to acquire (e.g. a habit)"
+          ],
+          "kind": "tags",
+          "note": "Transitive English (\"to master / to acquire\") for intransitive 身につく.",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2042140": {
+      "word": "栄養満点【えいようまんてん】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "highly nourishing (nutritious)",
+            "earning top marks nutrition-wise"
+          ],
+          "kind": "unclear",
+          "note": "\"earning top marks nutrition-wise\" is awkward.",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2056740": {
+      "word": "模する【もする】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "to imitate",
+            "to copy",
+            "to mock",
+            "to replace",
+            "to model after"
+          ],
+          "kind": "unclear",
+          "note": "\"to mock\" here means \"to imitate\" (its old sense); easily read as \"to ridicule\".",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2062980": {
+      "word": "ありゃしない",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "doesn't even exist"
+          ],
+          "kind": "missing",
+          "note": "Only \"doesn't even exist\"; misses its emphatic use (危ないったらありゃしない).",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2069680": {
+      "word": "あと一歩【あといっぽ】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "one more",
+            "another",
+            "the other"
+          ],
+          "kind": "wrong",
+          "note": "Sense 1 (\"one more / another / the other\") doesn't fit あと一歩, \"just one more step\".",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2082640": {
+      "word": "やって行く【やっていく】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "to live",
+            "to make a living",
+            "to get on with"
+          ],
+          "kind": "unclear",
+          "note": "\"to get on with\": carry on, or get along with someone?",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2086670": {
+      "word": "出やすい【でやすい】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "tending to break out or project easily"
+          ],
+          "kind": "unclear",
+          "note": "\"tending to break out or project easily\" is vague.",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2089480": {
+      "word": "どうかした",
+      "notes": [
+        {
+          "sense": 2,
+          "eng": [
+            "slightest",
+            "mere",
+            "trivial",
+            "some",
+            "chance",
+            "accidental",
+            "unexpected"
+          ],
+          "kind": "unclear",
+          "note": "Sense 2 mixes \"slightest / mere\" with \"chance / accidental / unexpected\".",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2089520": {
+      "word": "それはどうも",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "why yes, thank you"
+          ],
+          "kind": "unclear",
+          "note": "\"why yes, thank you\" is an odd paraphrase.",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2118450": {
+      "word": "何人たりとも【なんぴとたりとも】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "no one at all",
+            "no one, who he or she may be"
+          ],
+          "kind": "typo",
+          "note": "\"no one, who he or she may be\": probably \"whoever he or she may be\".",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2119920": {
+      "word": "その割には【そのわりには】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "unexpectedly",
+            "unusually",
+            "considering all that"
+          ],
+          "kind": "unclear",
+          "note": "\"unexpectedly / unusually\" misses the usual \"for all that, considering\".",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2128130": {
+      "word": "側から【そばから】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "as soon as",
+            "right after"
+          ],
+          "kind": "missing",
+          "note": "\"as soon as\" misses the nuance that it happens again as soon as it's done.",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2136825": {
+      "word": "話がわかる【はなしがわかる】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "down to earth",
+            "reasonable",
+            "able to deal with"
+          ],
+          "kind": "tags",
+          "note": "Tagged exp,v5r, but the glosses are adjectives (\"down to earth / reasonable\").",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2148680": {
+      "word": "掛け【がけ】",
+      "notes": [
+        {
+          "sense": 3,
+          "eng": [
+            "tenths (e.g. wholesale price, as tenths of retail price)"
+          ],
+          "kind": "unclear",
+          "note": "Sense 3 \"tenths\" is cryptic without a note.",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2158990": {
+      "word": "いいとこ",
+      "notes": [
+        {
+          "sense": 4,
+          "eng": [
+            "utter",
+            "extreme"
+          ],
+          "kind": "unclear",
+          "note": "Sense 4 (\"utter / extreme\", adj-f) has no usage note.",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2162830": {
+      "word": "子たち【こたち】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "children"
+          ],
+          "kind": "tags",
+          "note": "The tags col, pol, abbr and ksb together look odd for a gloss that is just \"children\".",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2173420": {
+      "word": "心を奪う【こころをうばう】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "to be thoroughly attracted by",
+            "to be completely fascinated by"
+          ],
+          "kind": "wrong",
+          "note": "Passive English (\"to be attracted by\") fits 心を奪われる; 心を奪う is \"to captivate\".",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2179460": {
+      "word": "物がある【ものがある】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "to be the case that"
+          ],
+          "kind": "unclear",
+          "note": "\"to be the case that\" is vague for a sentence-final expression of judgement.",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2228950": {
+      "word": "無駄にしない【むだにしない】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "make good use of",
+            "make the most of"
+          ],
+          "kind": "tags",
+          "note": "Tagged exp,adj-i, but the glosses are verb phrases, without \"to\".",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2267170": {
+      "word": "ご立派【ごりっぱ】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "splendid",
+            "fine",
+            "handsome",
+            "elegant",
+            "imposing",
+            "prominent",
+            "legal",
+            "legitimate"
+          ],
+          "kind": "wrong",
+          "note": "\"legal / legitimate\" sit oddly beside \"splendid / handsome\".",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2272850": {
+      "word": "己が【おのが】",
+      "notes": [
+        {
+          "sense": 2,
+          "eng": [
+            "I ...",
+            "one ..."
+          ],
+          "kind": "unclear",
+          "note": "Sense 2 is only \"I ... / one ...\".",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2272940": {
+      "word": "曲がった【まがった】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "bent",
+            "curved",
+            "warped",
+            "winded",
+            "twisted"
+          ],
+          "kind": "typo",
+          "note": "\"winded\" for \"winding\".",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2435540": {
+      "word": "と思われる【とおもわれる】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "be considered",
+            "be deemed",
+            "be thought to be"
+          ],
+          "kind": "typo",
+          "note": "The verb glosses lack \"to\" (\"be considered\").",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2462520": {
+      "word": "聞く耳【きくみみ】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "acute ear",
+            "good ear"
+          ],
+          "kind": "wrong",
+          "note": "\"acute ear / good ear\": 聞く耳 is usually willingness to listen (聞く耳を持たない).",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2531470": {
+      "word": "男同士【おとこどうし】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "fellow men"
+          ],
+          "kind": "unclear",
+          "note": "Sense 1 \"fellow men\" is vague (men among themselves?).",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2533830": {
+      "word": "少なすぎる【すくなすぎる】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "to be lacking in options",
+            "to be too few"
+          ],
+          "kind": "wrong",
+          "note": "\"to be lacking in options\" is odd for 少なすぎる (\"too few\").",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2540180": {
+      "word": "どうしてる",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "How did you like ...?",
+            "How about ...?",
+            "What's going on?",
+            "How's it going?"
+          ],
+          "kind": "wrong",
+          "note": "\"How did you like ...?\" is an odd fit; どうしてる is usually \"how are you doing?\".",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2542300": {
+      "word": "ここに来て【ここにきて】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "came here",
+            "coming here"
+          ],
+          "kind": "unclear",
+          "note": "Sense 1 (\"came here / coming here\") reads as a literal gloss, not a meaning.",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2613010": {
+      "word": "事【ごと】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "nominalizing suffix"
+          ],
+          "kind": "tags",
+          "note": "\"nominalizing suffix\" describes the word but isn't marked as an explanation.",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2665610": {
+      "word": "協力関係【きょうりょくかんけい】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "cooperative relation",
+            "cooperative relationship",
+            "collaborative relationships",
+            "cooperative structure",
+            "cooperative ties",
+            "cooperative alliance",
+            "partnership",
+            "close ties",
+            "hookup"
+          ],
+          "kind": "wrong",
+          "note": "\"hookup\" is out of place among \"cooperative relation / partnership\".",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2742580": {
+      "word": "おっとっと",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "oops",
+            "that's enough (when pouring up alcohol, etc.)"
+          ],
+          "kind": "typo",
+          "note": "\"pouring up alcohol\": probably \"pouring\".",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2765050": {
+      "word": "食べられる【たべられる】",
+      "notes": [
+        {
+          "sense": 2,
+          "eng": [
+            "to be edible",
+            "to be good to eat"
+          ],
+          "kind": "tags",
+          "note": "Sense 2 is tagged adj-pn, but its glosses are verb phrases (\"to be edible\").",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2766260": {
+      "word": "酷すぎる【ひどすぎる】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "egregious",
+            "outrageous",
+            "too much",
+            "over the top"
+          ],
+          "kind": "tags",
+          "note": "Tagged adj-pn, but it behaves as an adj-i.",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2771180": {
+      "word": "せや",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "that is right",
+            "that is so",
+            "oh, right"
+          ],
+          "kind": "tags",
+          "note": "Tagged as a noun, but せや works as an expression (\"that's right\").",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2773260": {
+      "word": "車【しゃ】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "car",
+            "vehicle",
+            "van",
+            "truck",
+            "wagon",
+            "lorry"
+          ],
+          "kind": "unclear",
+          "note": "Sense 1 \"wagon\": a cart, or a station wagon?",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2780490": {
+      "word": "回復薬【かいふくやく】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "analepticum",
+            "restorative medicine"
+          ],
+          "kind": "unclear",
+          "note": "\"analepticum\" is an unusual Latin-looking term.",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2786640": {
+      "word": "何にせよ【なんにせよ】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "at any rate",
+            "anyhow",
+            "anyway",
+            "in any case",
+            "because"
+          ],
+          "kind": "wrong",
+          "note": "\"because\" is out of place beside \"at any rate / anyway / in any case\".",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2797000": {
+      "word": "お側【おそば】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "near",
+            "close",
+            "beside",
+            "vicinity",
+            "proximity",
+            "besides",
+            "while"
+          ],
+          "kind": "wrong",
+          "note": "\"besides / while\" are out of place beside \"near / beside / vicinity\".",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2825976": {
+      "word": "頼み【だのみ】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "depending on",
+            "dependent upon",
+            "relying on"
+          ],
+          "kind": "tags",
+          "note": "Verb-like glosses (\"depending on / relying on\") for a noun suffix.",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2827305": {
+      "word": "すらも",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "even",
+            "if only",
+            "if just",
+            "as long as",
+            "the only thing needed"
+          ],
+          "kind": "wrong",
+          "note": "\"if only / as long as\" doesn't fit すらも's usual meaning \"even\".",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2827360": {
+      "word": "どうあれ",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "no matter for",
+            "without regard to",
+            "whatever the ..."
+          ],
+          "kind": "typo",
+          "note": "\"no matter for\" doesn't read as English (perhaps \"no matter what\").",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2836051": {
+      "word": "後になる【あとになる】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "to become late",
+            "to fall behind",
+            "to lag",
+            "to pass (of time)"
+          ],
+          "kind": "unclear",
+          "note": "\"to become late\" is vague (getting behind, or being later?).",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2836137": {
+      "word": "これまた",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "this (is) again"
+          ],
+          "kind": "unclear",
+          "note": "\"this (is) again\" is vague.",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2836367": {
+      "word": "声がする【こえがする】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "to speak"
+          ],
+          "kind": "unclear",
+          "note": "\"to speak\" is odd for 声がする, usually \"to hear a voice\" or \"a voice is heard\".",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2840180": {
+      "word": "目が合う【めがあう】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "for two people's eyes to meet",
+            "catching someone's eye",
+            "making eye contact",
+            "meeting a person's gaze"
+          ],
+          "kind": "tags",
+          "note": "A verb (v5u), but most glosses are gerunds (\"catching someone's eye\").",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2840197": {
+      "word": "何処だって【どこだって】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "where?"
+          ],
+          "kind": "unclear",
+          "note": "Sense 1 \"where?\" is odd for だって; perhaps \"where (did you say)?\".",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2842204": {
+      "word": "無効化【むこうか】",
+      "notes": [
+        {
+          "sense": 2,
+          "eng": [
+            "vitiation"
+          ],
+          "kind": "unclear",
+          "note": "The medical \"vitiation\" is vague.",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2842389": {
+      "word": "可哀想に【かわいそうに】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "poor thing!",
+            "pour soul!",
+            "what a pity!"
+          ],
+          "kind": "typo",
+          "note": "\"pour soul\" for \"poor soul\".",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2844786": {
+      "word": "ばあ",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "boo! (as in \"peak-a-boo!\")"
+          ],
+          "kind": "typo",
+          "note": "\"peak-a-boo\" for \"peek-a-boo\".",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2844796": {
+      "word": "せめても",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "at the very least",
+            "at the very most",
+            "as a bare minimum",
+            "(even if it's) just"
+          ],
+          "kind": "wrong",
+          "note": "\"at the very least\" and \"at the very most\" contradict each other.",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2845181": {
+      "word": "肥前【ひぜん】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "Hizen (former province located in present-day Saga and Nagasaki prefectures, excluding Tsushima and Oki Islands)"
+          ],
+          "kind": "wrong",
+          "note": "The islands excluded are probably Tsushima and Iki (壱岐), not Oki.",
+          "found": "2026-11-19"
+        }
+      ]
+    },
+    "2848730": {
+      "word": "野郎ども【やろうども】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "bastards",
+            "guys",
+            "lads"
+          ],
+          "kind": "unclear",
+          "note": "Mixes \"bastards\" (derogatory) with \"guys / lads\" (friendly) in one entry.",
+          "found": "2026-11-25"
+        }
+      ]
+    },
+    "2859852": {
+      "word": "打ち【ぶち】",
+      "notes": [
+        {
+          "sense": 1,
+          "eng": [
+            "adds emphasis to the following verb or indicates that the action is done forcefully or violently"
+          ],
+          "kind": "tags",
+          "note": "A description (\"adds emphasis to the following verb\") not marked as an explanation.",
+          "found": "2026-11-27"
+        }
+      ]
+    },
+    "2871317": {
+      "word": "約束された【やくそくされた】",
+      "notes": [
+        {
+          "sense": 2,
+          "eng": [
+            "guaranteed (e.g. victory)",
+            "natural"
+          ],
+          "kind": "unclear",
+          "note": "Sense 2 \"natural\" is vague beside \"guaranteed\".",
+          "found": "2026-11-27"
+        }
+      ]
+    }
+  }
+}

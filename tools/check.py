@@ -10,7 +10,8 @@ fail; warnings are for the reviewer (a style rule with exceptions, or an approve
 changed since). Uses only Python's standard library.
 
 data/<code>.json holds the translations people wrote or approved; data/<code>_machine.json the machine translations,
-all pending until one is moved into <code>.json for review (tools/promote.py).
+all pending until one is moved into <code>.json for review (tools/promote.py). review/jmdict_english.json lists the
+places where JMdict's English itself looks wrong, found while translating (see README.md).
 """
 import json
 import re
@@ -19,6 +20,11 @@ import zipfile
 from pathlib import Path
 
 DATA = Path(__file__).resolve().parents[1] / "data"
+REVIEW = Path(__file__).resolve().parents[1] / "review" / "jmdict_english.json"
+# What a note in review/jmdict_english.json is about: a typo in the English, a gloss whose meaning looks wrong, English
+# too vague to translate safely, a part-of-speech or other tag that doesn't fit the glosses, or a meaning missing
+NOTE_KINDS = ("typo", "wrong", "unclear", "tags", "missing")
+NOTE_KEYS = ("sense", "eng", "kind", "note", "found")
 FORMAT = 1
 STATUSES = ("pending", "approved", "rejected")
 SOURCES = ("player", "machine", "maintainer")
@@ -221,6 +227,60 @@ def dump(data):
     return json.dumps({"format": data["format"], "entries": entries}, ensure_ascii=False, indent=2) + "\n"
 
 
+# A note's fields in NOTE_KEYS' order, then any others (which the check reports)
+def ordered_note(note):
+    if not isinstance(note, dict):
+        return note
+    return {**{k: note[k] for k in NOTE_KEYS if k in note}, **{k: v for k, v in note.items() if k not in NOTE_KEYS}}
+
+
+# review/jmdict_english.json's text in the standard layout: ids sorted, each entry's word, then its notes by sense
+def dump_review(data):
+    entries = dict(sorted(data["entries"].items(), key=lambda item: int(item[0]) if item[0].isdigit() else -1))
+    for entry in entries.values():
+        if isinstance(entry, dict) and isinstance(entry.get("notes"), list):
+            entry["notes"] = [ordered_note(n) for n in entry["notes"]]
+    return json.dumps({"entries": entries}, ensure_ascii=False, indent=2) + "\n"
+
+
+# Check review/jmdict_english.json: every note names a JMdict sense and records the English it was about. When that
+# English has changed since, JMdict may have fixed it: the check says so, to look and remove the note
+def check_review(report, path, jmdict=None):
+    name = f"review/{path.name}"
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as e:
+        report.error(name, f"not valid UTF-8 JSON: {e}")
+        return
+    if not isinstance(data, dict) or set(data) != {"entries"} or not isinstance(data["entries"], dict):
+        report.error(name, 'the file is {"entries": {...}}')
+        return
+    if path.read_text(encoding="utf-8").rstrip() + "\n" != dump_review(json.loads(path.read_text(encoding="utf-8"))):
+        report.error(name, "not in the standard layout: run python tools/format.py")
+    for eid, entry in data["entries"].items():
+        where = f"{name} {eid}"
+        if not re.fullmatch(r"\d+", eid) or not isinstance(entry, dict) or set(entry) != {"word", "notes"} \
+                or not isinstance(entry["notes"], list) or not entry["notes"]:
+            report.error(where, 'an entry is {"word": ..., "notes": [...]}, keyed by JMdict id')
+            continue
+        for note in entry["notes"]:
+            if not isinstance(note, dict) or set(note) != set(NOTE_KEYS) or not isinstance(note["sense"], int) \
+                    or note["sense"] < 1 or note["kind"] not in NOTE_KINDS or not isinstance(note["note"], str) \
+                    or not note["note"].strip() or not isinstance(note["eng"], list) \
+                    or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(note["found"])):
+                report.error(where, f"a note is {{{', '.join(NOTE_KEYS)}}}, kind one of {', '.join(NOTE_KINDS)}")
+                continue
+            if jmdict is None:
+                continue
+            if eid not in jmdict:
+                report.warn(where, "no longer in JMdict: remove the note")
+            elif note["sense"] > len(jmdict[eid]["senses"]):
+                report.warn(f"{where} sense {note['sense']}", "JMdict no longer has this sense: check and remove")
+            elif jmdict[eid]["senses"][note["sense"] - 1] != note["eng"]:
+                report.warn(f"{where} sense {note['sense']}", "JMdict's English has changed since the note: if it's "
+                            "fixed, remove the note")
+
+
 def main(argv):
     jmdict = None
     if "--jmdict" in argv:
@@ -233,6 +293,8 @@ def main(argv):
         if jmdict is not None:
             check_against_jmdict(report, path.name, entries, jmdict, path.stem.endswith("_machine"))
     check_leftovers(report, found)
+    if REVIEW.exists():
+        check_review(report, REVIEW, jmdict)
     for line in report.warnings:
         print("warning:", line)
     for line in report.errors:
